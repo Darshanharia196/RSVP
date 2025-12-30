@@ -1,0 +1,542 @@
+/* Editorial Vogue Theme - Nuclear Fix */
+
+:root {
+    --color-black: #353967;
+    /* Navy from Palette */
+    --color-cream: #f9f4e8;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+.rsvp-page {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow-x: hidden;
+    color: var(--color-black);
+    background-color: #FFE1E2;
+    /* Blush Pink from Palette */
+    padding: 20px;
+}
+
+/* The "Vogue" Frame */
+.rsvp-page::before {
+    content: '';
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    border: 1px solid var(--color-black);
+    z-index: 999;
+    pointer-events: none;
+}
+
+/* Typography Utilities */
+.font-heading {
+    font-family: var(--font-heading);
+}
+
+.font-body {
+    font-family: var(--font-body);
+}
+
+.italic {
+    font-style: italic;
+}
+
+/* Layout Grid */
+.editorial-grid {
+    display: block;
+    /* Simplified from grid to avoid complex overlaps */
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+/* Hero Section - Simplified */
+.hero-section {
+    position: relative;
+    min-height: 80vh;
+    margin-bottom: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-title-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    mix-blend-mode: normal;
+    /* Ensure visibility */
+}
+
+.hero-title-line {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 12vw, 11rem);
+    line-height: 0.8;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-black);
+}
+
+.hero-title-line.indent {
+    margin-left: 10vw;
+    font-style: italic;
+    font-weight: 400;
+}
+
+.hero-image-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.2);
+    opacity: 0.8;
+    /* Slight fade to help text pop if overlap occurs */
+}
+
+.hero-meta {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #FFE1E2;
+    /* Match page background */
+    padding: 1rem 2rem;
+    border-top: 2px solid var(--color-black);
+    border-left: 1px solid var(--color-black);
+    z-index: 20;
+    text-align: right;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Countdown - Massive & Isolated */
+.countdown-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem 0;
+    margin: 4rem 0;
+    border-top: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    background: #FFE1E2;
+    /* Match page background */
+    position: relative;
+    z-index: 10;
+}
+
+.countdown-timer {
+    display: flex;
+    align-items: baseline;
+    gap: 3vw;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-value {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 8vw, 10rem);
+    /* Forced massive size */
+    line-height: 1;
+    font-weight: 400;
+    color: var(--color-black);
+}
+
+.countdown-label {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-top: 1rem;
+}
+
+.countdown-separator {
+    width: 1px;
+    height: 80px;
+    background: var(--color-black);
+    transform: rotate(15deg);
+}
+
+/* Greeting */
+.greeting-section {
+    text-align: center;
+    margin: 8rem auto;
+    max-width: 800px;
+}
+
+.greeting-text {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+    font-style: italic;
+}
+
+.greeting-signature {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 1px solid var(--color-black);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* Events */
+.events-section {
+    margin-bottom: 10rem;
+}
+
+.events-header {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 1;
+    margin-bottom: 6rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-black);
+}
+
+.event-row {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
+    margin-bottom: 8rem;
+    align-items: start;
+}
+
+.event-info {
+    grid-column: 1 / 5;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-black);
+}
+
+.event-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.event-details {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.event-image-wrapper {
+    grid-column: 6 / 13;
+    height: 600px;
+    overflow: hidden;
+}
+
+.event-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+
+/* RSVP Form - Clean & Editorial */
+.rsvp-form-section {
+    max-width: 800px;
+    margin: 0 auto 10rem;
+}
+
+.rsvp-header {
+    text-align: center;
+    margin-bottom: 6rem;
+}
+
+.rsvp-title {
+    font-family: var(--font-heading);
+    font-size: 6rem;
+    margin-bottom: 1rem;
+}
+
+.rsvp-subtitle {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    border-bottom: 1px solid var(--color-black);
+    padding-bottom: 5px;
+}
+
+.member-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 2rem;
+}
+
+.member-rsvp-row {
+    display: flex;
+    flex-direction: row;
+    /* Horizontal alignment */
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.member-name {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin-bottom: 0;
+    /* Remove bottom margin for horizontal alignment */
+    flex: 1;
+}
+
+.rsvp-options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: auto;
+    /* Auto width to fit content */
+}
+
+.option-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    color: #999;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    flex: 1;
+    /* Make buttons take equal width */
+    text-align: center;
+}
+
+.option-btn:hover {
+    color: var(--color-black);
+}
+
+.option-btn.selected {
+    color: var(--color-black);
+    font-weight: 700;
+    border: 1px solid var(--color-black);
+    background: transparent;
+    /* Removed white box */
+}
+
+.option-divider {
+    color: #ccc;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 2rem;
+    margin-top: 6rem;
+    background: var(--color-black);
+    color: #fff;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #333;
+    letter-spacing: 6px;
+}
+
+/* Merged Event Row Layout */
+.event-row-merged {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4rem;
+    margin-bottom: 10rem;
+    /* Generous spacing between events */
+    align-items: start;
+    border-bottom: 1px solid var(--color-black);
+    padding-bottom: 6rem;
+}
+
+.event-row-merged:last-child {
+    border-bottom: none;
+    margin-bottom: 4rem;
+}
+
+/* Left Column: Details + RSVP */
+.event-left-col {
+    grid-column: 1 / 6;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    /* Space between details and RSVP form */
+}
+
+.event-name-large {
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.event-meta-clean p {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.event-wardrobe {
+    margin-top: 1rem !important;
+    font-style: italic;
+    text-transform: none !important;
+    opacity: 0.8;
+}
+
+/* RSVP Block within Event Row */
+.event-rsvp-block {
+    margin-top: 2rem;
+}
+
+.rsvp-block-title {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-bottom: 1px solid var(--color-black);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+}
+
+.member-list-horizontal {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.member-row-clean {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.member-name-clean {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+}
+
+.rsvp-options-clean {
+    display: flex;
+    gap: 1rem;
+}
+
+.option-btn-clean {
+    background: none;
+    border: none;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    color: #999;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.option-btn-clean:hover {
+    color: var(--color-black);
+}
+
+.option-btn-clean.selected {
+    color: var(--color-black);
+    font-weight: 700;
+    border: 1px solid var(--color-black);
+}
+
+.divider-clean {
+    color: #ddd;
+    font-size: 1.2rem;
+    align-self: center;
+}
+
+/* Right Column: Image */
+.event-right-col {
+    grid-column: 7 / 13;
+}
+
+.event-image-container-large {
+    width: 100%;
+    height: 700px;
+    /* Tall, editorial image */
+    overflow: hidden;
+}
+
+.event-image-large {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: transform 1s ease;
+}
+
+.event-image-container-large:hover .event-image-large {
+    transform: scale(1.02);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .event-row-merged {
+        display: flex;
+        flex-direction: column-reverse;
+        /* Image on top? Or bottom? Let's keep standard stacking */
+        gap: 2rem;
+        padding-bottom: 4rem;
+        margin-bottom: 4rem;
+    }
+
+    .event-left-col {
+        grid-column: 1 / -1;
+        width: 100%;
+    }
+
+    .event-right-col {
+        grid-column: 1 / -1;
+        width: 100%;
+    }
+
+    .event-image-container-large {
+        height: 400px;
+    }
+
+    .event-name-large {
+        font-size: 2.5rem;
+    }
+}
