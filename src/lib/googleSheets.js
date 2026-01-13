@@ -23,7 +23,7 @@ function getAuthClient() {
       throw new Error('Missing Google Sheets credentials in environment variables');
     }
 
-    // Use object-based initialization (new API)
+    // Use object-based initialization (confirmed working in tests)
     auth = new google.auth.JWT({
       email: clientEmail,
       key: privateKey,
@@ -132,6 +132,7 @@ export async function updateSheetData(sheetName, range, values) {
 
 /**
  * Get all families from the Families sheet
+ * Groups multiple rows with same family_id into single family object
  * @returns {Promise<Array>} Array of family objects
  */
 export async function getAllFamilies() {
@@ -142,14 +143,39 @@ export async function getAllFamilies() {
 
     const headers = data[0];
     const rows = data.slice(1);
+    const familiesMap = new Map();
 
-    return rows.map(row => {
-      const family = {};
+    rows.forEach(row => {
+      const rowData = {};
       headers.forEach((header, index) => {
-        family[header] = row[index] || '';
+        rowData[header] = row[index] || '';
       });
-      return family;
+
+      const familyId = rowData.family_id;
+      if (!familyId) return; // Skip empty rows
+
+      if (!familiesMap.has(familyId)) {
+        familiesMap.set(familyId, {
+          family_id: familyId,
+          family_name: rowData.family_name,
+          events_invited: rowData.events_invited,
+          members: []
+        });
+      }
+
+      // Add member from this row
+      // Handle both old column name 'member_names' and potential new one 'member_name'
+      const memberName = rowData.member_name || rowData.member_names;
+      if (memberName) {
+        familiesMap.get(familyId).members.push(memberName.trim());
+      }
     });
+
+    return Array.from(familiesMap.values()).map(family => ({
+      ...family,
+      // Keep backward compatibility for code expecting comma-separated string
+      member_names: family.members.join(', ')
+    }));
   } catch (error) {
     console.error('Error getting families:', error);
     throw error;
@@ -187,7 +213,9 @@ export async function getAllEvents() {
     return rows.map(row => {
       const event = {};
       headers.forEach((header, index) => {
-        event[header] = row[index] || '';
+        // Normalize header to lowercase to handle 'Day' vs 'day'
+        const key = header.toLowerCase() === 'day' ? 'day' : header;
+        event[key] = row[index] || '';
       });
       return event;
     }).sort((a, b) => {
@@ -222,23 +250,22 @@ export async function getEventsForFamily(familyId) {
 
 /**
  * Save RSVP response
- * @param {Object} response - Response object with family and event details
+ * @param {Object} response - Response object with family and day details
  * @returns {Promise<Object>} Response from Google Sheets API
  */
 export async function saveRSVPResponse(response) {
   try {
     const timestamp = new Date().toISOString();
-    const responseId = `RESP_${Date.now()}`;
+    const responseId = `RESP_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
+    // Structure: response_id | family_id | family_name | member_name | day | attending | submitted_at
     const values = [
       responseId,
       response.family_id,
       response.family_name,
-      response.event_id,
-      response.event_name,
-      response.attending_count,
-      response.member_responses,
-      response.notes || '',
+      response.member_name,
+      response.day,
+      response.attending ? 'YES' : 'NO',
       timestamp,
     ];
 
@@ -289,7 +316,7 @@ export async function getAllConfig() {
     const config = {};
     rows.forEach(row => {
       if (row[0]) {
-        config[row[0]] = row[1] || '';
+        config[row[0].trim()] = row[1] || '';
       }
     });
 

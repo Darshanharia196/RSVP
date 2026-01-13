@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import '../rsvp.css';
 
-export default function SuccessPage({ searchParams }) {
+export default async function SuccessPage({ searchParams }) {
+    const { id } = await searchParams;
+
     return (
         <div className="rsvp-page">
             <div className="rsvp-content" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
@@ -13,7 +15,7 @@ export default function SuccessPage({ searchParams }) {
                     </p>
 
                     <div style={{ marginTop: '2rem' }}>
-                        <Link href={`/rsvp?id=${searchParams.id}`} className="submit-button" style={{ display: 'inline-block', textDecoration: 'none' }}>
+                        <Link href={`/rsvp?id=${id}`} className="submit-btn" style={{ display: 'inline-block', textDecoration: 'none' }}>
                             Back to Invitation
                         </Link>
                     </div>

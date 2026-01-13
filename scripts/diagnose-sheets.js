@@ -31,12 +31,11 @@ async function diagnose() {
     // Step 2: Test authentication
     console.log('\n🔐 Step 2: Testing Authentication...');
     try {
-        const auth = new google.auth.JWT(
-            clientEmail,
-            null,
-            privateKey, // Don't convert - dotenv already did it
-            ['https://www.googleapis.com/auth/spreadsheets']
-        );
+        const auth = new google.auth.JWT({
+            email: clientEmail,
+            key: privateKey,
+            scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+        });
 
         await auth.authorize();
         console.log('   ✅ Authentication successful!');
@@ -49,12 +48,11 @@ async function diagnose() {
     // Step 3: Test Google Sheets API access
     console.log('\n📊 Step 3: Testing Google Sheets API Access...');
     try {
-        const auth = new google.auth.JWT(
-            clientEmail,
-            null,
-            privateKey, // Don't convert - dotenv already did it
-            ['https://www.googleapis.com/auth/spreadsheets']
-        );
+        const auth = new google.auth.JWT({
+            email: clientEmail,
+            key: privateKey,
+            scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+        });
 
         const sheets = google.sheets({ version: 'v4', auth });
 
@@ -95,12 +93,11 @@ async function diagnose() {
     // Step 4: Test reading from Families sheet
     console.log('\n👨‍👩‍👧‍👦 Step 4: Testing Families Sheet...');
     try {
-        const auth = new google.auth.JWT(
-            clientEmail,
-            null,
-            privateKey, // Don't convert - dotenv already did it
-            ['https://www.googleapis.com/auth/spreadsheets']
-        );
+        const auth = new google.auth.JWT({
+            email: clientEmail,
+            key: privateKey,
+            scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+        });
 
         const sheets = google.sheets({ version: 'v4', auth });
 

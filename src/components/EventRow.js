@@ -1,4 +1,5 @@
 'use client';
+import FormattedText from './FormattedText';
 
 /**
  * EventRow Component
@@ -17,48 +18,23 @@ export default function EventRow({ event, index, memberNames, selections, onSele
 
     return (
         <div className="event-row-merged">
-            {/* Left Column: Details + RSVP */}
+            {/* Left Column: Details */}
             <div className="event-left-col">
                 {/* Event Details */}
                 <div className="event-details-block">
                     <h3 className="event-name-large">{event.event_name}</h3>
                     <div className="event-meta-clean">
                         <p>{formatDate(event.event_date)}</p>
-                        <p>{event.event_time}</p>
-                        <p>{event.event_location}</p>
-                        {event.wardrobe && <p className="event-wardrobe">Dress Code: {event.wardrobe}</p>}
-                    </div>
-                </div>
-
-                {/* RSVP Section for this Event */}
-                <div className="event-rsvp-block">
-                    <h4 className="rsvp-block-title">Who is attending?</h4>
-                    <div className="member-list-horizontal">
-                        {memberNames.map((member) => {
-                            const status = selections[event.event_id]?.[member];
-                            return (
-                                <div key={member} className="member-row-clean">
-                                    <span className="member-name-clean">{member}</span>
-                                    <div className="rsvp-options-clean">
-                                        <button
-                                            type="button"
-                                            className={`option-btn-clean ${status === 'attending' ? 'selected' : ''}`}
-                                            onClick={() => onSelectionChange(event.event_id, member, 'attending')}
-                                        >
-                                            YES
-                                        </button>
-                                        <span className="divider-clean">/</span>
-                                        <button
-                                            type="button"
-                                            className={`option-btn-clean ${status === 'not_attending' ? 'selected' : ''}`}
-                                            onClick={() => onSelectionChange(event.event_id, member, 'not_attending')}
-                                        >
-                                            NO
-                                        </button>
-                                    </div>
+                        <p>{event.event_timing}</p>
+                        <p>{event.venue}</p>
+                        {event.wardrobe && (
+                            <div className="event-wardrobe-block">
+                                <p className="wardrobe-label">WARDROBE GUIDE</p>
+                                <div className="wardrobe-content">
+                                    <FormattedText text={event.wardrobe} />
                                 </div>
-                            );
-                        })}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

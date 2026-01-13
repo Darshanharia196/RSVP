@@ -15,41 +15,22 @@ export async function POST(request) {
 
         console.log(`Processing RSVP for family: ${familyId}`);
 
-        // Get all events for this family
-        const events = await getEventsForFamily(familyId);
+        // Selections structure: { [day]: { [memberName]: 'attending' | 'not_attending' } }
+        for (const [day, memberSelections] of Object.entries(selections)) {
+            for (const [member, status] of Object.entries(memberSelections)) {
 
-        for (const event of events) {
-            const eventSelections = selections[event.event_id];
-
-            if (!eventSelections) {
-                console.log(`No selections found for event ${event.event_id}, skipping`);
-                continue;
-            }
-
-            // Calculate attending count
-            let attendingCount = 0;
-            const memberResponseParts = [];
-
-            for (const [member, status] of Object.entries(eventSelections)) {
                 const isAttending = status === 'attending';
-                if (isAttending) attendingCount++;
-                memberResponseParts.push(`${member}: ${isAttending ? 'Yes' : 'No'}`);
+
+                console.log(`Saving RSVP for ${member} on ${day}: ${isAttending ? 'YES' : 'NO'}`);
+
+                await saveRSVPResponse({
+                    family_id: familyId,
+                    family_name: familyName,
+                    member_name: member,
+                    day: day,
+                    attending: isAttending
+                });
             }
-
-            const memberResponsesStr = memberResponseParts.join(', ');
-
-            console.log(`Saving RSVP for event ${event.event_id}: ${attendingCount} attending. Details: ${memberResponsesStr}`);
-
-            // Save individual response row for this event
-            await saveRSVPResponse({
-                family_id: familyId,
-                family_name: familyName,
-                event_id: event.event_id,
-                event_name: event.event_name,
-                attending_count: attendingCount,
-                member_responses: memberResponsesStr,
-                notes: '' // Notes field removed
-            });
         }
 
         return NextResponse.json({ success: true });
