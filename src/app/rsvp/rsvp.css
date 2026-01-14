@@ -83,7 +83,7 @@
     font-family: var(--font-heading);
     font-size: clamp(3rem, 7vw, 6rem);
     line-height: 1.1;
-    font-weight: 700;
+    font-weight: 400;
     text-transform: uppercase;
     color: var(--color-black);
 }
