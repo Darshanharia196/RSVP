@@ -28,27 +28,20 @@ export default function RSVPForm({ family, events, hasResponded = false }) {
         return grouped;
     }, [events]);
 
-    // Handle selection change: Day -> Member -> Status
-    const handleSelectionChange = (day, memberName, status) => {
+    // Handle selection change: Member -> Status
+    const handleSelectionChange = (memberName, status) => {
         setSelections(prev => ({
             ...prev,
-            [day]: {
-                ...prev[day],
-                [memberName]: status
-            }
+            [memberName]: status
         }));
     };
 
-    // Validate that every member has a selection for every day
+    // Validate that every member has a selection
     const isFormValid = () => {
-        const days = Object.keys(eventsByDay);
-        if (days.length === 0) return false;
-
-        for (const day of days) {
-            for (const member of memberNames) {
-                if (!selections[day]?.[member]) {
-                    return false;
-                }
+        if (memberNames.length === 0) return false;
+        for (const member of memberNames) {
+            if (!selections[member]) {
+                return false;
             }
         }
         return true;
@@ -69,7 +62,8 @@ export default function RSVPForm({ family, events, hasResponded = false }) {
                 body: JSON.stringify({
                     family_id: family.family_id,
                     family_name: family.family_name,
-                    selections: selections
+                    selections: selections,
+                    invited_days: Object.keys(eventsByDay) // Send the list of days they are invited to
                 }),
             });
 
@@ -112,63 +106,59 @@ export default function RSVPForm({ family, events, hasResponded = false }) {
                         })}
                     </div>
 
-                    {!hasResponded && (
-                        <>
-                            {/* Divider before RSVP */}
-                            <div className="rsvp-section-divider"></div>
-
-                            {/* RSVP Block for this Day */}
-                            <div className="day-rsvp-block">
-                                <h3 className="day-rsvp-header">RSVP - DAY {day}</h3>
-
-                                <div className="member-list-horizontal">
-                                    {memberNames.map((member) => {
-                                        const status = selections[day]?.[member];
-                                        return (
-                                            <div key={member} className="member-row-clean">
-                                                <span className="member-name-clean">{member}</span>
-                                                <div className="rsvp-options-clean">
-                                                    <button
-                                                        type="button"
-                                                        className={`option-btn-clean ${status === 'attending' ? 'selected' : ''}`}
-                                                        onClick={() => handleSelectionChange(day, member, 'attending')}
-                                                    >
-                                                        YES
-                                                    </button>
-                                                    <span className="divider-clean">/</span>
-                                                    <button
-                                                        type="button"
-                                                        className={`option-btn-clean ${status === 'not_attending' ? 'selected' : ''}`}
-                                                        onClick={() => handleSelectionChange(day, member, 'not_attending')}
-                                                    >
-                                                        NO
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-                        </>
-                    )}
-
                     {/* Divider between days */}
                     <div className="day-divider"></div>
                 </div>
             ))}
 
             {!hasResponded ? (
-                <div className="submit-section">
-                    <button
-                        type="submit"
-                        className="submit-btn"
-                        disabled={!isFormValid() || isSubmitting}
-                    >
-                        {isSubmitting ? 'Submitting...' : 'Submit RSVP ✨'}
-                    </button>
-                    {!isFormValid() && (
-                        <p className="validation-message">Please select an option for every family member for all days.</p>
-                    )}
+                <div className="unified-rsvp-section">
+                    <div className="rsvp-section-divider"></div>
+                    <div className="day-rsvp-block">
+                        <h3 className="day-rsvp-header">RSVP</h3>
+                        <p className="rsvp-instruction">Will you be attending the wedding celebrations?</p>
+
+                        <div className="member-list-horizontal">
+                            {memberNames.map((member) => {
+                                const status = selections[member];
+                                return (
+                                    <div key={member} className="member-row-clean">
+                                        <span className="member-name-clean">{member}</span>
+                                        <div className="rsvp-options-clean">
+                                            <button
+                                                type="button"
+                                                className={`option-btn-clean ${status === 'attending' ? 'selected' : ''}`}
+                                                onClick={() => handleSelectionChange(member, 'attending')}
+                                            >
+                                                YES
+                                            </button>
+                                            <span className="divider-clean">/</span>
+                                            <button
+                                                type="button"
+                                                className={`option-btn-clean ${status === 'not_attending' ? 'selected' : ''}`}
+                                                onClick={() => handleSelectionChange(member, 'not_attending')}
+                                            >
+                                                NO
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    <div className="submit-section">
+                        <button
+                            type="submit"
+                            className="submit-btn"
+                            disabled={!isFormValid() || isSubmitting}
+                        >
+                            {isSubmitting ? 'Submitting...' : 'Submit RSVP ✨'}
+                        </button>
+                        {!isFormValid() && (
+                            <p className="validation-message">Please select an option for every family member.</p>
+                        )}
+                    </div>
                 </div>
             ) : (
                 <div className="thank-you-message">

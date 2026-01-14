@@ -4,23 +4,23 @@ import { NextResponse } from 'next/server';
 export async function POST(request) {
     try {
         const body = await request.json();
-        const { family_id: familyId, family_name: familyName, selections } = body;
+        const { family_id: familyId, family_name: familyName, selections, invited_days } = body;
 
-        if (!familyId || !selections) {
+        if (!familyId || !selections || !invited_days) {
             return NextResponse.json(
-                { error: 'Family ID and selections are required' },
+                { error: 'Family ID, selections, and invited_days are required' },
                 { status: 400 }
             );
         }
 
-        console.log(`Processing RSVP for family: ${familyId}`);
+        console.log(`Processing RSVP for family: ${familyId} across days: ${invited_days.join(', ')}`);
 
-        // Selections structure: { [day]: { [memberName]: 'attending' | 'not_attending' } }
-        for (const [day, memberSelections] of Object.entries(selections)) {
-            for (const [member, status] of Object.entries(memberSelections)) {
+        // Selections structure: { [memberName]: 'attending' | 'not_attending' }
+        for (const [member, status] of Object.entries(selections)) {
+            const isAttending = status === 'attending';
 
-                const isAttending = status === 'attending';
-
+            // Save response for EACH day the family is invited to
+            for (const day of invited_days) {
                 console.log(`Saving RSVP for ${member} on ${day}: ${isAttending ? 'YES' : 'NO'}`);
 
                 await saveRSVPResponse({

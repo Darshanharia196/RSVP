@@ -59,9 +59,9 @@
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     /* Title gets slightly more space */
-    gap: 6rem;
-    min-height: 80vh;
-    margin-bottom: 10rem;
+    gap: 4rem;
+    min-height: 70vh;
+    margin-bottom: 6rem;
     align-items: center;
 }
 
@@ -144,8 +144,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 6rem 0;
-    margin: 4rem 0;
+    padding: 4rem 0;
+    margin: 2rem 0;
     border-top: 1px solid var(--color-black);
     border-bottom: 1px solid var(--color-black);
     background: #FFE1E2;
@@ -196,7 +196,7 @@
 /* Greeting */
 .greeting-section {
     text-align: center;
-    margin: 8rem auto;
+    margin: 4rem auto;
     max-width: 800px;
 }
 
@@ -275,10 +275,10 @@
 /* RSVP Form - Clean & Editorial */
 .rsvp-form-section {
     max-width: 1200px;
-    margin: 0 auto 10rem;
+    margin: 0 auto 6rem;
     border-top: 1px solid var(--color-black);
     /* Added divider */
-    padding-top: 8rem;
+    padding-top: 4rem;
 }
 
 .rsvp-header {
@@ -422,11 +422,11 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 4rem;
-    margin-bottom: 10rem;
+    margin-bottom: 6rem;
     /* Generous spacing between events */
     align-items: start;
     border-bottom: 1px solid var(--color-black);
-    padding-bottom: 6rem;
+    padding-bottom: 4rem;
 }
 
 .event-row-merged:last-child {
@@ -705,7 +705,7 @@
 
 /* Day-wise Layout Styles */
 .day-section {
-    margin-bottom: 8rem;
+    margin-bottom: 4rem;
 }
 
 .day-header-container {
@@ -733,8 +733,8 @@
 
 /* Adjust event row for day list */
 .day-events-list .event-row-merged {
-    margin-bottom: 6rem;
-    padding-bottom: 6rem;
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
     border-bottom: 1px solid rgba(53, 57, 103, 0.2);
     /* Lighter separator between events in same day */
 }
@@ -749,7 +749,7 @@
 .rsvp-section-divider {
     height: 1px;
     background: var(--color-black);
-    margin: 4rem 0 2rem 0;
+    margin: 2rem 0 1rem 0;
     width: 100%;
     opacity: 0.3;
 }
@@ -760,6 +760,14 @@
     border: none;
     margin-top: 2rem;
     text-align: center;
+}
+
+.rsvp-instruction {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 3rem;
+    opacity: 0.8;
 }
 
 .day-rsvp-header {
@@ -775,7 +783,7 @@
 .day-divider {
     height: 1px;
     background: var(--color-black);
-    margin-top: 8rem;
+    margin-top: 4rem;
     width: 100%;
 }
 

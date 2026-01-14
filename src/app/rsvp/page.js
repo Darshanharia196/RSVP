@@ -73,7 +73,7 @@ export default async function RSVPPage({ searchParams }) {
 
                         <div className="hero-meta">
                             <div className="meta-line-primary">
-                                <span>{new Date(weddingDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                                <span>March 4 & 5, 2026</span>
                                 <span className="meta-separator">•</span>
                                 <span>{location}</span>
                             </div>
