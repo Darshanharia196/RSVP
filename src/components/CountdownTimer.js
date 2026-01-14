@@ -11,7 +11,6 @@ export default function CountdownTimer({ targetDate }) {
         days: 0,
         hours: 0,
         minutes: 0,
-        seconds: 0,
     });
 
     useEffect(() => {
@@ -23,18 +22,17 @@ export default function CountdownTimer({ targetDate }) {
                     days: Math.floor(difference / (1000 * 60 * 60 * 24)),
                     hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
                     minutes: Math.floor((difference / 1000 / 60) % 60),
-                    seconds: Math.floor((difference / 1000) % 60),
                 });
             } else {
-                setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+                setTimeLeft({ days: 0, hours: 0, minutes: 0 });
             }
         };
 
         // Calculate immediately
         calculateTimeLeft();
 
-        // Update every second
-        const timer = setInterval(calculateTimeLeft, 1000);
+        // Update every minute
+        const timer = setInterval(calculateTimeLeft, 60000);
 
         return () => clearInterval(timer);
     }, [targetDate]);
@@ -55,11 +53,7 @@ export default function CountdownTimer({ targetDate }) {
                 <span className="countdown-value">{String(timeLeft.minutes).padStart(2, '0')}</span>
                 <span className="countdown-label">Minutes</span>
             </div>
-            <div className="countdown-separator"></div>
-            <div className="countdown-item">
-                <span className="countdown-value">{String(timeLeft.seconds).padStart(2, '0')}</span>
-                <span className="countdown-label">Seconds</span>
-            </div>
+
         </div>
     );
 }

@@ -136,6 +136,7 @@
 .meta-line-secondary {
     font-weight: 700;
     /* Make hashtag bold */
+    text-transform: none;
 }
 
 /* Countdown - Massive & Isolated */
@@ -287,16 +288,37 @@
 
 .rsvp-title {
     font-family: var(--font-heading);
-    font-size: 6rem;
+    font-size: 5rem;
     margin-bottom: 1rem;
 }
 
 .rsvp-subtitle {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 4px;
-    border-bottom: 1px solid var(--color-black);
     padding-bottom: 5px;
+}
+
+.thank-you-message {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--color-black);
+    margin-top: 2rem;
+}
+
+.thank-you-message h3 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.thank-you-message p {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
 }
 
 .member-list {
@@ -724,21 +746,30 @@
 }
 
 /* Day RSVP Block */
-.day-rsvp-block {
-    background: rgba(255, 255, 255, 0.5);
-    /* Subtle background to separate from events */
-    padding: 4rem;
-    border: 1px solid var(--color-black);
-    margin-top: 4rem;
+.rsvp-section-divider {
+    height: 1px;
+    background: var(--color-black);
+    margin: 4rem 0 2rem 0;
+    width: 100%;
+    opacity: 0.3;
 }
 
-.rsvp-block-subtitle {
-    font-family: var(--font-body);
-    font-size: 1rem;
+.day-rsvp-block {
+    background: transparent;
+    padding: 0;
+    border: none;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.day-rsvp-header {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 700;
     text-transform: uppercase;
+    margin-bottom: 2rem;
     letter-spacing: 2px;
-    margin-bottom: 3rem;
-    opacity: 0.8;
+    color: var(--color-black);
 }
 
 .day-divider {

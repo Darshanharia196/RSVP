@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import EventRow from './EventRow';
 import { useRouter } from 'next/navigation';
 
-export default function RSVPForm({ family, events }) {
+export default function RSVPForm({ family, events, hasResponded = false }) {
     const router = useRouter();
     const [selections, setSelections] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -99,66 +99,83 @@ export default function RSVPForm({ family, events }) {
 
                     {/* Events for this Day */}
                     <div className="day-events-list">
-                        {dayEvents.map((event, index) => (
-                            <EventRow
-                                key={event.event_id}
-                                event={event}
-                                index={index}
-                            />
-                        ))}
+                        {dayEvents.map((event) => {
+                            // Find global index to ensure correct image mapping
+                            const globalIndex = events.findIndex(e => e.event_id === event.event_id);
+                            return (
+                                <EventRow
+                                    key={event.event_id}
+                                    event={event}
+                                    index={globalIndex}
+                                />
+                            );
+                        })}
                     </div>
 
-                    {/* RSVP Block for this Day */}
-                    <div className="day-rsvp-block">
-                        <h3 className="rsvp-block-title">RSVP for Day {day}</h3>
-                        <p className="rsvp-block-subtitle">Will you be attending all events on this day?</p>
+                    {!hasResponded && (
+                        <>
+                            {/* Divider before RSVP */}
+                            <div className="rsvp-section-divider"></div>
 
-                        <div className="member-list-horizontal">
-                            {memberNames.map((member) => {
-                                const status = selections[day]?.[member];
-                                return (
-                                    <div key={member} className="member-row-clean">
-                                        <span className="member-name-clean">{member}</span>
-                                        <div className="rsvp-options-clean">
-                                            <button
-                                                type="button"
-                                                className={`option-btn-clean ${status === 'attending' ? 'selected' : ''}`}
-                                                onClick={() => handleSelectionChange(day, member, 'attending')}
-                                            >
-                                                YES
-                                            </button>
-                                            <span className="divider-clean">/</span>
-                                            <button
-                                                type="button"
-                                                className={`option-btn-clean ${status === 'not_attending' ? 'selected' : ''}`}
-                                                onClick={() => handleSelectionChange(day, member, 'not_attending')}
-                                            >
-                                                NO
-                                            </button>
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
+                            {/* RSVP Block for this Day */}
+                            <div className="day-rsvp-block">
+                                <h3 className="day-rsvp-header">RSVP - DAY {day}</h3>
+
+                                <div className="member-list-horizontal">
+                                    {memberNames.map((member) => {
+                                        const status = selections[day]?.[member];
+                                        return (
+                                            <div key={member} className="member-row-clean">
+                                                <span className="member-name-clean">{member}</span>
+                                                <div className="rsvp-options-clean">
+                                                    <button
+                                                        type="button"
+                                                        className={`option-btn-clean ${status === 'attending' ? 'selected' : ''}`}
+                                                        onClick={() => handleSelectionChange(day, member, 'attending')}
+                                                    >
+                                                        YES
+                                                    </button>
+                                                    <span className="divider-clean">/</span>
+                                                    <button
+                                                        type="button"
+                                                        className={`option-btn-clean ${status === 'not_attending' ? 'selected' : ''}`}
+                                                        onClick={() => handleSelectionChange(day, member, 'not_attending')}
+                                                    >
+                                                        NO
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </>
+                    )}
 
                     {/* Divider between days */}
                     <div className="day-divider"></div>
                 </div>
             ))}
 
-            <div className="submit-section">
-                <button
-                    type="submit"
-                    className="submit-btn"
-                    disabled={!isFormValid() || isSubmitting}
-                >
-                    {isSubmitting ? 'Submitting...' : 'Submit RSVP ✨'}
-                </button>
-                {!isFormValid() && (
-                    <p className="validation-message">Please select an option for every family member for all days.</p>
-                )}
-            </div>
+            {!hasResponded ? (
+                <div className="submit-section">
+                    <button
+                        type="submit"
+                        className="submit-btn"
+                        disabled={!isFormValid() || isSubmitting}
+                    >
+                        {isSubmitting ? 'Submitting...' : 'Submit RSVP ✨'}
+                    </button>
+                    {!isFormValid() && (
+                        <p className="validation-message">Please select an option for every family member for all days.</p>
+                    )}
+                </div>
+            ) : (
+                <div className="thank-you-message">
+                    <h3>Thank You!</h3>
+                    <p>Your RSVP has been recorded. We look forward to seeing you!</p>
+                </div>
+            )}
         </form>
     );
 }

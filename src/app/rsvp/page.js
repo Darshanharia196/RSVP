@@ -1,4 +1,4 @@
-import { getFamilyById, getEventsForFamily, getAllConfig } from '@/lib/googleSheets';
+import { getFamilyById, getEventsForFamily, getAllConfig, hasFamilyResponded } from '@/lib/googleSheets';
 import CountdownTimer from '@/components/CountdownTimer';
 import EventCard from '@/components/EventCard';
 import RSVPForm from '@/components/RSVPForm';
@@ -23,10 +23,11 @@ export default async function RSVPPage({ searchParams }) {
 
     try {
         // Fetch data from Google Sheets
-        const [family, events, config] = await Promise.all([
+        const [family, events, config, hasResponded] = await Promise.all([
             getFamilyById(familyId),
             getEventsForFamily(familyId),
             getAllConfig(),
+            hasFamilyResponded(familyId),
         ]);
 
         if (!family) {
@@ -93,9 +94,6 @@ export default async function RSVPPage({ searchParams }) {
                     <h2 className="greeting-text">
                         <FormattedText text={greetingText} />
                     </h2>
-                    <div className="greeting-signature">
-                        — The {family.family_name} Family
-                    </div>
                 </section>
 
                 {/* Events Spread */}
@@ -103,10 +101,14 @@ export default async function RSVPPage({ searchParams }) {
                 <section className="rsvp-form-section">
                     <div className="rsvp-header">
                         <h2 className="rsvp-title">Itinerary & RSVP</h2>
-                        <span className="rsvp-subtitle">Kindly respond by {rsvpDeadline}</span>
+                        {!hasResponded && <span className="rsvp-subtitle">Kindly respond by {rsvpDeadline}</span>}
                     </div>
 
-                    <RSVPForm family={family} events={events || []} />
+                    <RSVPForm
+                        family={family}
+                        events={events || []}
+                        hasResponded={hasResponded}
+                    />
                 </section>
 
                 <footer className="rsvp-footer">

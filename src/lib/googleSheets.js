@@ -277,6 +277,25 @@ export async function saveRSVPResponse(response) {
 }
 
 /**
+ * Check if a family has already responded
+ * @param {string} familyId - Family ID
+ * @returns {Promise<boolean>} True if any response exists for this family
+ */
+export async function hasFamilyResponded(familyId) {
+  try {
+    const data = await getSheetData('Responses');
+    if (data.length <= 1) return false;
+
+    const rows = data.slice(1);
+    // family_id is the second column (index 1)
+    return rows.some(row => row[1] === familyId);
+  } catch (error) {
+    console.error('Error checking if family responded:', error);
+    return false;
+  }
+}
+
+/**
  * Get configuration value
  * @param {string} key - Configuration key
  * @returns {Promise<string|null>} Configuration value or null

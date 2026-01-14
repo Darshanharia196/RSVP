@@ -32,52 +32,64 @@ async function generateFamilyIds() {
 
         console.log(`Found ${rows.length} rows.`);
 
-        // 3. Generate IDs
+        // 3. Scan for existing IDs and map them
         const familyMap = new Map();
-        let counter = 1;
-        const updates = [];
+        let maxId = 0;
 
-        rows.forEach((row, index) => {
+        rows.forEach(row => {
             const currentId = row[0];
             const familyName = row[1];
 
-            if (!familyName) return; // Skip empty names
+            if (currentId && currentId.startsWith('FAMILY_')) {
+                const idNum = parseInt(currentId.split('_')[1]);
+                if (!isNaN(idNum)) {
+                    maxId = Math.max(maxId, idNum);
+                    if (familyName && !familyMap.has(familyName)) {
+                        familyMap.set(familyName, currentId);
+                    }
+                }
+            }
+        });
+
+        console.log(`Highest existing ID: FAMILY_${String(maxId).padStart(3, '0')}`);
+
+        // 4. Generate new IDs for missing ones
+        let counter = maxId + 1;
+        const newColumnData = rows.map((row, index) => {
+            const currentId = row[0];
+            const familyName = row[1];
+
+            if (!familyName) return [currentId || '']; // Keep existing or empty if no name
 
             let assignedId = familyMap.get(familyName);
 
             if (!assignedId) {
-                // Generate new ID
-                assignedId = `FAMILY_${String(counter).padStart(3, '0')}`;
-                familyMap.set(familyName, assignedId);
-                counter++;
+                if (currentId && currentId.startsWith('FAMILY_')) {
+                    // Already has an ID but wasn't in map (shouldn't happen with step 3 but safe)
+                    assignedId = currentId;
+                    familyMap.set(familyName, assignedId);
+                } else {
+                    // Generate new ID
+                    assignedId = `FAMILY_${String(counter).padStart(3, '0')}`;
+                    familyMap.set(familyName, assignedId);
+                    counter++;
+                }
             }
 
-            // If ID is missing or different, we update it
-            if (currentId !== assignedId) {
-                updates.push({
-                    range: `Families!A${index + 2}`, // +2 because 1-based and header row
-                    values: [[assignedId]]
-                });
-            }
+            return [assignedId];
         });
 
-        if (updates.length === 0) {
+        // 5. Check if updates are needed
+        const hasChanges = newColumnData.some((row, index) => row[0] !== (rows[index][0] || ''));
+
+        if (!hasChanges) {
             console.log('✅ All families already have correct IDs. No updates needed.');
             return;
         }
 
-        console.log(`📝 Updating ${updates.length} rows with new IDs...`);
+        console.log(`📝 Updating rows with new IDs...`);
 
-        // 4. Perform Batch Update
-        // We can't use values.batchUpdate for disjoint ranges easily with simple values API in one go unless we write the whole column.
-        // Writing the whole column is safer and more efficient.
-
-        const newColumnData = rows.map(row => {
-            const familyName = row[1];
-            if (!familyName) return [''];
-            return [familyMap.get(familyName)];
-        });
-
+        // 6. Perform Batch Update
         await sheets.spreadsheets.values.update({
             spreadsheetId,
             range: `Families!A2:A${rows.length + 1}`,
@@ -89,8 +101,8 @@ async function generateFamilyIds() {
 
         console.log('✅ Successfully updated family IDs!');
 
-        // Log the mapping for the user
-        console.log('\nGenerated Mappings:');
+        // Log the new mappings
+        console.log('\nFinal Mappings:');
         familyMap.forEach((id, name) => {
             console.log(`${id} -> ${name}`);
         });

@@ -22,7 +22,14 @@ export default function EventRow({ event, index, memberNames, selections, onSele
             <div className="event-left-col">
                 {/* Event Details */}
                 <div className="event-details-block">
-                    <h3 className="event-name-large">{event.event_name}</h3>
+                    <h3 className="event-name-large">
+                        {event.event_name.split(' (').map((part, i) => (
+                            <span key={i}>
+                                {i > 0 && <br />}
+                                {i > 0 ? `(${part}` : part}
+                            </span>
+                        ))}
+                    </h3>
                     <div className="event-meta-clean">
                         <p>{formatDate(event.event_date)}</p>
                         <p>{event.event_timing}</p>
