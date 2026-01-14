@@ -16,7 +16,7 @@ function getAuthClient() {
   if (auth) return auth;
 
   try {
-    const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
+    const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, '\n');
     const clientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL;
 
     if (!privateKey || !clientEmail) {
