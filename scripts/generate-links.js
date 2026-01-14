@@ -40,7 +40,7 @@ async function generateLinks() {
         });
 
         // 4. Prepare data for "Invite links" tab
-        const baseUrl = 'http://localhost:3001/rsvp?id=';
+        const baseUrl = (process.env.BASE_URL || 'http://localhost:3001').replace(/\/$/, '') + '/rsvp?id=';
         const linkData = [['Family Name', 'RSVP Link']]; // Header
 
         uniqueFamilies.forEach((name, id) => {
