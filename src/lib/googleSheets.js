@@ -16,12 +16,29 @@ function getAuthClient() {
   if (auth) return auth;
 
   try {
-    const privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY?.replace(/\\n/g, '\n').replace(/^"|"$/g, '');
+    let privateKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
     const clientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL;
 
     if (!privateKey || !clientEmail) {
       throw new Error('Missing Google Sheets credentials in environment variables');
     }
+
+    // Robust cleaning: remove quotes, handle escaped newlines
+    privateKey = privateKey.trim().replace(/^"|"$/g, '').replace(/\\n/g, '\n');
+
+    // Fix missing newlines in PEM format (common when copying to Vercel)
+    // If it has headers but no newline immediately after the header, it's likely all on one line
+    if (privateKey.includes('-----BEGIN PRIVATE KEY-----') && !privateKey.includes('\n', privateKey.indexOf('-----BEGIN PRIVATE KEY-----') + 25)) {
+      const base64Part = privateKey
+        .replace('-----BEGIN PRIVATE KEY-----', '')
+        .replace('-----END PRIVATE KEY-----', '')
+        .replace(/\s/g, '');
+
+      privateKey = `-----BEGIN PRIVATE KEY-----\n${base64Part}\n-----END PRIVATE KEY-----`;
+    }
+
+    // Sanitized log for debugging (first 30 chars only)
+    console.log(`Initializing auth with email: ${clientEmail}, key starts with: ${privateKey.substring(0, 30)}...`);
 
     // Use object-based initialization (confirmed working in tests)
     auth = new google.auth.JWT({
