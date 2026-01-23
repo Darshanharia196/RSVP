@@ -113,7 +113,6 @@ export default function RSVPForm({ family, events, hasResponded = false }) {
 
             {!hasResponded ? (
                 <div className="unified-rsvp-section">
-                    <div className="rsvp-section-divider"></div>
                     <div className="day-rsvp-block">
                         <h3 className="day-rsvp-header">RSVP</h3>
                         <p className="rsvp-instruction">Will you be attending the wedding celebrations?</p>

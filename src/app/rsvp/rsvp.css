@@ -790,3 +790,12 @@
 .day-section:last-child .day-divider {
     display: none;
 }
+.rsvp-footer {
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.8;
+}
