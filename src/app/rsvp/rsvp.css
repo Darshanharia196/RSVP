@@ -6,6 +6,76 @@
     --color-cream: #f9f4e8;
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Montserrat', sans-serif;
+    --section-spacing: 4rem;
+    --item-spacing: 2rem;
+}
+
+.top-invocation {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--color-black);
+    opacity: 0.9;
+}
+
+.cover-page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 10vh;
+    margin-bottom: var(--item-spacing);
+    background-color: #FFE1E2;
+    /* Match page background */
+}
+
+.cover-ganeshji {
+    width: 105px;
+    height: auto;
+    margin-bottom: 2rem;
+    object-fit: contain;
+    opacity: 0.9;
+}
+
+.cover-invocation {
+    font-family: var(--font-noto-gujarati);
+    font-size: 1.5rem;
+    color: var(--color-black);
+    margin-bottom: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.cover-logo {
+    max-width: 600px;
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+    filter: contrast(1.05);
+}
+
+.cover-divider {
+    width: 60%;
+    height: 1px;
+    background: var(--color-black);
+    margin-top: 3rem;
+    opacity: 0.3;
+}
+
+.section-divider {
+    height: 1px;
+    background: var(--color-black);
+    width: 100%;
+    opacity: 0.2;
+    margin: 0;
+}
+
+.invocation-text {
+    font-family: var(--font-noto-gujarati);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .rsvp-page {
@@ -61,7 +131,7 @@
     /* Title gets slightly more space */
     gap: 4rem;
     min-height: 70vh;
-    margin-bottom: 6rem;
+    margin-bottom: var(--section-spacing);
     align-items: center;
 }
 
@@ -144,8 +214,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 4rem 0;
-    margin: 2rem 0;
+    padding: var(--section-spacing) 0;
+    margin: var(--item-spacing) 0;
     border-top: 1px solid var(--color-black);
     border-bottom: 1px solid var(--color-black);
     background: #FFE1E2;
@@ -196,7 +266,7 @@
 /* Greeting */
 .greeting-section {
     text-align: center;
-    margin: 4rem auto;
+    margin: var(--section-spacing) auto;
     max-width: 800px;
 }
 
@@ -220,14 +290,14 @@
 
 /* Events */
 .events-section {
-    margin-bottom: 10rem;
+    margin-bottom: var(--section-spacing);
 }
 
 .events-header {
     font-family: var(--font-heading);
     font-size: clamp(4rem, 10vw, 8rem);
     line-height: 1;
-    margin-bottom: 6rem;
+    margin-bottom: var(--section-spacing);
     padding-bottom: 2rem;
     border-bottom: 1px solid var(--color-black);
 }
@@ -275,10 +345,10 @@
 /* RSVP Form - Clean & Editorial */
 .rsvp-form-section {
     max-width: 1200px;
-    margin: 0 auto 6rem;
+    margin: 0 auto var(--section-spacing);
     border-top: 1px solid var(--color-black);
     /* Added divider */
-    padding-top: 4rem;
+    padding-top: var(--section-spacing);
 }
 
 .rsvp-header {
@@ -422,16 +492,16 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 4rem;
-    margin-bottom: 6rem;
+    margin-bottom: var(--section-spacing);
     /* Generous spacing between events */
     align-items: start;
     border-bottom: 1px solid var(--color-black);
-    padding-bottom: 4rem;
+    padding-bottom: var(--section-spacing);
 }
 
 .event-row-merged:last-child {
     border-bottom: none;
-    margin-bottom: 4rem;
+    margin-bottom: var(--section-spacing);
 }
 
 /* Left Column: Details + RSVP */
@@ -578,8 +648,34 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
+    :root {
+        --section-spacing: 2rem;
+        --item-spacing: 1rem;
+    }
+
     .rsvp-page {
         padding: 15px;
+    }
+
+    .cover-page {
+        padding-top: 5vh;
+        margin-bottom: var(--item-spacing);
+    }
+
+    .cover-ganeshji {
+        margin-bottom: 1rem;
+    }
+
+    .cover-invocation {
+        margin-bottom: 1rem;
+    }
+
+    .cover-logo {
+        margin-bottom: 1rem;
+    }
+
+    .cover-divider {
+        margin-top: 1.5rem;
     }
 
     .rsvp-page::before {
@@ -595,8 +691,8 @@
         flex-direction: column;
         gap: 2rem;
         min-height: auto;
-        margin-bottom: 6rem;
-        padding-top: 4rem;
+        margin-bottom: 2rem;
+        padding-top: 1rem;
     }
 
     .hero-title-line {
@@ -624,7 +720,8 @@
 
     /* Countdown Mobile */
     .countdown-strip {
-        padding: 4rem 1rem;
+        padding: 2rem 1rem;
+        margin: 1rem 0;
     }
 
     .countdown-timer {
@@ -648,6 +745,10 @@
     }
 
     /* Greeting Mobile */
+    .greeting-section {
+        margin: 2rem 0;
+    }
+
     .greeting-text {
         font-size: 1.8rem;
         padding: 0 1rem;
@@ -655,7 +756,7 @@
 
     /* Itinerary & RSVP Mobile */
     .rsvp-form-section {
-        padding-top: 4rem;
+        padding-top: 2rem;
     }
 
     .event-row-merged {
@@ -705,12 +806,12 @@
 
 /* Day-wise Layout Styles */
 .day-section {
-    margin-bottom: 4rem;
+    margin-bottom: var(--section-spacing);
 }
 
 .day-header-container {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: var(--section-spacing);
     position: relative;
 }
 
@@ -728,13 +829,13 @@
 }
 
 .day-events-list {
-    margin-bottom: 4rem;
+    margin-bottom: var(--section-spacing);
 }
 
 /* Adjust event row for day list */
 .day-events-list .event-row-merged {
-    margin-bottom: 4rem;
-    padding-bottom: 4rem;
+    margin-bottom: var(--section-spacing);
+    padding-bottom: var(--section-spacing);
     border-bottom: 1px solid rgba(53, 57, 103, 0.2);
     /* Lighter separator between events in same day */
 }
@@ -790,6 +891,7 @@
 .day-section:last-child .day-divider {
     display: none;
 }
+
 .rsvp-footer {
     text-align: center;
     padding: 6rem 2rem 4rem;
