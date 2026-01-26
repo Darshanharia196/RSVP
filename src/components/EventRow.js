@@ -18,42 +18,42 @@ export default function EventRow({ event, index, memberNames, selections, onSele
 
     return (
         <div className="event-row-merged">
-            {/* Left Column: Details */}
+            {/* Left Column: Event Name & Date */}
             <div className="event-left-col">
-                {/* Event Details */}
+                <h3 className="event-name-large">
+                    {event.event_name.split(' (').map((part, i) => (
+                        <span key={i}>
+                            {i > 0 && <br />}
+                            {i > 0 ? `(${part}` : part}
+                        </span>
+                    ))}
+                </h3>
+                <div className="event-date-clean">
+                    <p>{formatDate(event.event_date)}</p>
+                </div>
+            </div>
+
+            {/* Right Column: Venue, Timing & Wardrobe */}
+            <div className="event-right-col">
                 <div className="event-details-block">
-                    <h3 className="event-name-large">
-                        {event.event_name.split(' (').map((part, i) => (
-                            <span key={i}>
-                                {i > 0 && <br />}
-                                {i > 0 ? `(${part}` : part}
-                            </span>
-                        ))}
-                    </h3>
                     <div className="event-meta-clean">
-                        <p>{formatDate(event.event_date)}</p>
-                        <p>{event.event_timing}</p>
-                        <p>{event.venue}</p>
+                        <div className="meta-item">
+                            <p className="meta-label">TIMING</p>
+                            <p className="meta-value">{event.event_timing}</p>
+                        </div>
+                        <div className="meta-item">
+                            <p className="meta-label">VENUE</p>
+                            <p className="meta-value">{event.venue}</p>
+                        </div>
                         {event.wardrobe && (
                             <div className="event-wardrobe-block">
-                                <p className="wardrobe-label">WARDROBE GUIDE</p>
+                                <p className="meta-label">WARDROBE GUIDE</p>
                                 <div className="wardrobe-content">
                                     <FormattedText text={event.wardrobe} />
                                 </div>
                             </div>
                         )}
                     </div>
-                </div>
-            </div>
-
-            {/* Right Column: Image */}
-            <div className="event-right-col">
-                <div className="event-image-container-large">
-                    <img
-                        src={`/events/event-${index + 1}.jpg`}
-                        alt={event.event_name}
-                        className="event-image-large"
-                    />
                 </div>
             </div>
         </div>

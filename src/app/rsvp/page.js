@@ -57,7 +57,6 @@ export default async function RSVPPage({ searchParams }) {
                     <img src="/ganeshji.png" alt="Ganeshji" className="cover-ganeshji" />
                     <div className="cover-invocation">|| શ્રી ગણેશાય નમઃ ||</div>
                     <img src="/logo.png" alt="Wedding Logo" className="cover-logo" />
-                    <div className="cover-divider"></div>
                 </section>
                 <div className="section-divider"></div>
                 {/* Hero Section */}
