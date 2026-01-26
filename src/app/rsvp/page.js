@@ -118,6 +118,9 @@ export default async function RSVPPage({ searchParams }) {
                 </section>
 
                 <footer className="rsvp-footer">
+                    <div className="thank-you-photo-container">
+                        <img src="/thankyou.jpg" alt="Thank You" className="thank-you-photo" />
+                    </div>
                     <p>With Love, {groomName} & {brideName}</p>
                 </footer>
             </div>

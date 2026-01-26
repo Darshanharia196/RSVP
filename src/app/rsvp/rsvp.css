@@ -391,6 +391,37 @@
     letter-spacing: 1px;
 }
 
+.thank-you-photo-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 4rem auto 2rem;
+    overflow: hidden;
+}
+
+.thank-you-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .thank-you-photo-container {
+        height: 60vh;
+        /* Force tall portrait height on mobile */
+        margin: 2rem -20px 2rem;
+        /* Negative margin to go full bleed */
+        width: calc(100% + 40px);
+        max-width: none;
+    }
+
+    .thank-you-photo {
+        height: 100%;
+        object-fit: cover;
+        /* Crop to fill the portrait container */
+        object-position: center;
+    }
+}
+
 .member-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
