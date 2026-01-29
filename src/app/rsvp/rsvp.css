@@ -470,6 +470,8 @@
     flex: 1;
     /* Make buttons take equal width */
     text-align: center;
+    font-weight: 600;
+    /* Increased thickness */
 }
 
 .option-btn:hover {
@@ -498,6 +500,8 @@
     background: transparent;
     color: var(--color-black);
     border: 1px solid var(--color-black);
+    border-radius: 8px;
+    /* Rounded edges */
     font-family: var(--font-heading);
     font-size: 1.5rem;
     text-transform: uppercase;
