@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ignored user scripts
+scripts/list-events.js
+scripts/update-family-events.js
+public/watermark.png

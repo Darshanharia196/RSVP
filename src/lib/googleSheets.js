@@ -362,3 +362,83 @@ export async function getAllConfig() {
     throw error;
   }
 }
+
+/**
+ * Get all itinerary items from the Itinerary sheet
+ * Groups items by day
+ * @returns {Promise<Object>} Object with day keys, each containing array of items
+ */
+export async function getItinerary() {
+  try {
+    const data = await getSheetData('Itinerary');
+
+    if (data.length === 0) return {};
+
+    const headers = data[0];
+    const rows = data.slice(1);
+
+    const grouped = {};
+
+    rows
+      .map(row => {
+        const item = {};
+        headers.forEach((header, index) => {
+          item[header] = row[index] || '';
+        });
+        return item;
+      })
+      .filter(item => item.day && item.title)
+      .sort((a, b) => parseInt(a.display_order || 999) - parseInt(b.display_order || 999))
+      .forEach(item => {
+        const day = item.day.trim();
+        if (!grouped[day]) grouped[day] = [];
+        grouped[day].push(item);
+      });
+
+    return grouped;
+  } catch (error) {
+    console.error('Error getting itinerary:', error);
+    throw error;
+  }
+}
+
+/**
+ * Get all wardrobe/dress code items from the Wardrobe sheet
+ * Groups items by day
+ * @returns {Promise<Object>} Object with day keys, each containing array of items
+ */
+export async function getWardrobe() {
+  try {
+    const data = await getSheetData('Wardrobe');
+
+    if (data.length === 0) return {};
+
+    const headers = data[0];
+    const rows = data.slice(1);
+
+    const grouped = {};
+
+    rows
+      .map(row => {
+        const item = {};
+        headers.forEach((header, index) => {
+          item[header] = row[index] || '';
+        });
+        return item;
+      })
+      .filter(item => item.day && item.event_name)
+      .sort((a, b) => parseInt(a.display_order || 999) - parseInt(b.display_order || 999))
+      .forEach(item => {
+        const day = item.day.trim();
+        if (!grouped[day]) grouped[day] = [];
+        grouped[day].push(item);
+      });
+
+    return grouped;
+  } catch (error) {
+    console.error('Error getting wardrobe:', error);
+    throw error;
+  }
+}
+
+

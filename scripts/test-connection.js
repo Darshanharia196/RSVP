@@ -21,12 +21,11 @@ async function testConnection() {
             throw new Error('Missing required environment variables. Check your .env.local file.');
         }
 
-        const auth = new google.auth.JWT(
-            clientEmail,
-            null,
-            privateKey,
-            ['https://www.googleapis.com/auth/spreadsheets']
-        );
+        const auth = new google.auth.JWT({
+            email: clientEmail,
+            key: privateKey,
+            scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+        });
 
         const sheets = google.sheets({ version: 'v4', auth });
 
@@ -41,7 +40,7 @@ async function testConnection() {
             try {
                 const response = await sheets.spreadsheets.values.get({
                     spreadsheetId,
-                    range: `${sheetName}!A1:Z100`,
+                    range: `${sheetName}!A:Z`,
                 });
 
                 const rows = response.data.values || [];

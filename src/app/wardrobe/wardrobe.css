@@ -1,0 +1,313 @@
+/* ===========================
+   Wardrobe Page — Editorial Theme
+   =========================== */
+
+:root {
+    --color-black: #353967;
+    --color-blush: #FFE1E2;
+    --font-heading: var(--font-playfair), 'Playfair Display', serif;
+    --font-body: var(--font-montserrat), 'Montserrat', sans-serif;
+}
+
+/* ===========================
+   Base
+   =========================== */
+.wardrobe-page {
+    min-height: 100vh;
+    background-color: var(--color-blush);
+    color: var(--color-black);
+    overflow-x: hidden;
+}
+
+/* ===========================
+   Navigation (shared)
+   =========================== */
+.landing-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    background: rgba(255, 225, 226, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(53, 57, 103, 0.12);
+}
+
+.nav-logo {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-black);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-black);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    opacity: 1;
+    border-bottom-color: var(--color-black);
+}
+
+/* ===========================
+   Page Header
+   =========================== */
+.wardrobe-header {
+    padding: 10rem 2.5rem 4rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--color-black);
+}
+
+.wardrobe-header-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.wardrobe-header-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--color-black);
+}
+
+.wardrobe-header-title em {
+    font-style: italic;
+}
+
+/* ===========================
+   Content Area
+   =========================== */
+.wardrobe-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2.5rem 6rem;
+}
+
+/* ===========================
+   Day Section
+   =========================== */
+.wardrobe-day {
+    padding: 4rem 0;
+    border-bottom: 1px solid rgba(53, 57, 103, 0.15);
+}
+
+.wardrobe-day:last-child {
+    border-bottom: none;
+}
+
+.wardrobe-day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.wardrobe-day-label {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-black);
+    white-space: nowrap;
+}
+
+.wardrobe-day-date {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.5;
+}
+
+/* ===========================
+   Event Cards Grid
+   =========================== */
+.wardrobe-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 2px;
+}
+
+/* ===========================
+   Single Event Card
+   =========================== */
+.wardrobe-card {
+    padding: 2.5rem;
+    border: 1px solid rgba(53, 57, 103, 0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    background: rgba(255, 255, 255, 0.25);
+    transition: background 0.2s ease;
+}
+
+.wardrobe-card:hover {
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.wardrobe-card-event {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-black);
+    opacity: 0.45;
+}
+
+.wardrobe-card-dresscode {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-black);
+    line-height: 1.2;
+}
+
+/* Color swatches row */
+.wardrobe-card-colors {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.wardrobe-colors-label {
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.4;
+}
+
+.wardrobe-colors-text {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-black);
+    opacity: 0.75;
+    line-height: 1.5;
+}
+
+/* Divider */
+.wardrobe-card-divider {
+    height: 1px;
+    background: var(--color-black);
+    opacity: 0.1;
+}
+
+/* Notes */
+.wardrobe-card-notes {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--color-black);
+    opacity: 0.6;
+    font-style: italic;
+}
+
+/* ===========================
+   Empty State
+   =========================== */
+.wardrobe-empty {
+    text-align: center;
+    padding: 8rem 2rem;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-style: italic;
+    opacity: 0.4;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+.wardrobe-footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-black);
+    opacity: 0.4;
+    border-top: 1px solid rgba(53, 57, 103, 0.15);
+}
+
+/* ===========================
+   Mobile
+   =========================== */
+@media (max-width: 768px) {
+    .landing-nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        letter-spacing: 2px;
+        font-size: 0.7rem;
+    }
+
+    .wardrobe-header {
+        padding: 8rem 1.5rem 3rem;
+    }
+
+    .wardrobe-content {
+        padding: 0 1.5rem 4rem;
+    }
+
+    .wardrobe-day-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .wardrobe-cards {
+        grid-template-columns: 1fr;
+        gap: 1px;
+    }
+
+    .wardrobe-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .wardrobe-card-dresscode {
+        font-size: 1.5rem;
+    }
+}

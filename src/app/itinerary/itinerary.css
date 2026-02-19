@@ -1,0 +1,349 @@
+/* ===========================
+   Itinerary Page — Editorial Theme
+   =========================== */
+
+:root {
+    --color-black: #353967;
+    --color-blush: #FFE1E2;
+    --font-heading: var(--font-playfair), 'Playfair Display', serif;
+    --font-body: var(--font-montserrat), 'Montserrat', sans-serif;
+    --section-spacing: 4rem;
+}
+
+/* ===========================
+   Base
+   =========================== */
+.itinerary-page {
+    min-height: 100vh;
+    background-color: var(--color-blush);
+    color: var(--color-black);
+    overflow-x: hidden;
+}
+
+/* ===========================
+   Navigation (shared with landing)
+   =========================== */
+.landing-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    background: rgba(255, 225, 226, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(53, 57, 103, 0.12);
+}
+
+.nav-logo {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-black);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-black);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    opacity: 1;
+    border-bottom-color: var(--color-black);
+}
+
+/* ===========================
+   Page Header
+   =========================== */
+.itinerary-header {
+    padding: 10rem 2.5rem 4rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--color-black);
+}
+
+.itinerary-header-label {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    opacity: 0.5;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.itinerary-header-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--color-black);
+}
+
+.itinerary-header-title em {
+    font-style: italic;
+}
+
+/* ===========================
+   Content Area
+   =========================== */
+.itinerary-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2.5rem 6rem;
+}
+
+/* ===========================
+   Day Section
+   =========================== */
+.itinerary-day {
+    padding: 4rem 0;
+    border-bottom: 1px solid rgba(53, 57, 103, 0.15);
+}
+
+.itinerary-day:last-child {
+    border-bottom: none;
+}
+
+.itinerary-day-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.itinerary-day-label {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--color-black);
+    white-space: nowrap;
+}
+
+.itinerary-day-date {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    opacity: 0.5;
+}
+
+/* ===========================
+   Timeline
+   =========================== */
+.itinerary-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-left: 2rem;
+    border-left: 1px solid rgba(53, 57, 103, 0.2);
+}
+
+/* ===========================
+   Timeline Item
+   =========================== */
+.itinerary-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 2rem;
+    padding: 1.8rem 0;
+    position: relative;
+    border-bottom: 1px solid rgba(53, 57, 103, 0.07);
+}
+
+.itinerary-item:last-child {
+    border-bottom: none;
+}
+
+/* Dot on the timeline */
+.itinerary-item::before {
+    content: '';
+    position: absolute;
+    left: -2.35rem;
+    top: 2.3rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-black);
+    opacity: 0.3;
+}
+
+/* Larger dot for main events */
+.itinerary-item.type-event::before {
+    width: 12px;
+    height: 12px;
+    left: -2.4rem;
+    opacity: 0.8;
+}
+
+.itinerary-item-time {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-black);
+    opacity: 0.5;
+    padding-top: 0.2rem;
+    white-space: nowrap;
+}
+
+.itinerary-item-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.itinerary-item-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--color-black);
+    line-height: 1.2;
+}
+
+/* Italicise main events */
+.itinerary-item.type-event .itinerary-item-title {
+    font-style: italic;
+    font-size: 1.9rem;
+}
+
+.itinerary-item-description {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-black);
+    opacity: 0.65;
+    margin-top: 0.2rem;
+    max-width: 600px;
+}
+
+/* Type badge */
+.itinerary-item-type {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-black);
+    opacity: 0.35;
+    margin-top: 0.3rem;
+}
+
+/* ===========================
+   Empty State
+   =========================== */
+.itinerary-empty {
+    text-align: center;
+    padding: 8rem 2rem;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-style: italic;
+    opacity: 0.4;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+.itinerary-footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-black);
+    opacity: 0.4;
+    border-top: 1px solid rgba(53, 57, 103, 0.15);
+}
+
+/* ===========================
+   Mobile
+   =========================== */
+@media (max-width: 768px) {
+    .landing-nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        letter-spacing: 2px;
+        font-size: 0.7rem;
+    }
+
+    .itinerary-header {
+        padding: 8rem 1.5rem 3rem;
+    }
+
+    .itinerary-content {
+        padding: 0 1.5rem 4rem;
+    }
+
+    .itinerary-day-header {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .itinerary-timeline {
+        padding-left: 1.2rem;
+    }
+
+    .itinerary-item {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+        padding: 1.5rem 0;
+    }
+
+    .itinerary-item::before {
+        left: -1.55rem;
+        top: 1.8rem;
+    }
+
+    .itinerary-item.type-event::before {
+        left: -1.6rem;
+    }
+
+    .itinerary-item-time {
+        font-size: 0.7rem;
+    }
+
+    .itinerary-item-title {
+        font-size: 1.4rem;
+    }
+
+    .itinerary-item.type-event .itinerary-item-title {
+        font-size: 1.6rem;
+    }
+}

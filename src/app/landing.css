@@ -1,0 +1,404 @@
+/* ===========================
+   Landing Page — Editorial Theme
+   Matches RSVP page design system
+   =========================== */
+
+:root {
+    --color-black: #353967;
+    --color-cream: #f9f4e8;
+    --color-blush: #FFE1E2;
+    --font-heading: var(--font-playfair), 'Playfair Display', serif;
+    --font-body: var(--font-montserrat), 'Montserrat', sans-serif;
+    --font-gujarati: var(--font-noto-gujarati), sans-serif;
+    --section-spacing: 4rem;
+}
+
+/* ===========================
+   Base
+   =========================== */
+.landing-page {
+    min-height: 100vh;
+    background-color: var(--color-blush);
+    color: var(--color-black);
+    overflow-x: hidden;
+}
+
+/* ===========================
+   Navigation
+   =========================== */
+.landing-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2.5rem;
+    background: rgba(255, 225, 226, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(53, 57, 103, 0.12);
+}
+
+.nav-logo {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--color-black);
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-black);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    padding-bottom: 2px;
+    border-bottom: 1px solid transparent;
+}
+
+.nav-links a:hover {
+    opacity: 1;
+    border-bottom-color: var(--color-black);
+}
+
+/* ===========================
+   Cover Section
+   =========================== */
+.landing-cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+}
+
+.cover-ganeshji {
+    width: 80px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.85;
+    margin-bottom: 1.5rem;
+}
+
+.cover-invocation {
+    font-family: var(--font-gujarati);
+    font-size: 1.3rem;
+    color: var(--color-black);
+    margin-bottom: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.cover-logo {
+    max-width: 520px;
+    width: 80%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 3rem;
+}
+
+.cover-divider {
+    width: 50%;
+    height: 1px;
+    background: var(--color-black);
+    opacity: 0.2;
+    margin-bottom: 3rem;
+}
+
+.cover-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.cover-meta-primary {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--color-black);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cover-meta-separator {
+    opacity: 0.4;
+}
+
+.cover-meta-hashtag {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--color-black);
+    opacity: 0.7;
+}
+
+/* ===========================
+   Hero Section
+   =========================== */
+.landing-hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 6rem 2.5rem;
+    border-top: 1px solid rgba(53, 57, 103, 0.15);
+}
+
+.hero-title-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-title-line {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    line-height: 1.1;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--color-black);
+}
+
+.hero-title-line.indent {
+    margin-left: 5vw;
+    font-style: italic;
+}
+
+.hero-image-col {
+    position: relative;
+}
+
+.hero-image-frame {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(1.05);
+    display: block;
+}
+
+/* ===========================
+   Countdown Strip
+   =========================== */
+.landing-countdown {
+    border-top: 1px solid var(--color-black);
+    border-bottom: 1px solid var(--color-black);
+    padding: 4rem 2rem;
+    display: flex;
+    justify-content: center;
+    background: var(--color-blush);
+}
+
+/* Countdown timer internals — mirrors rsvp.css */
+.countdown-timer {
+    display: flex;
+    align-items: baseline;
+    gap: 3vw;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.countdown-value {
+    font-family: var(--font-heading);
+    font-size: clamp(4rem, 8vw, 10rem);
+    line-height: 1;
+    font-weight: 400;
+    color: var(--color-black);
+}
+
+.countdown-label {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-top: 1rem;
+    color: var(--color-black);
+}
+
+.countdown-separator {
+    width: 1px;
+    height: 80px;
+    background: var(--color-black);
+    transform: rotate(15deg);
+}
+
+/* ===========================
+   Greeting Section
+   =========================== */
+.landing-greeting {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+    text-align: center;
+}
+
+.greeting-text {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--color-black);
+    margin-bottom: 2rem;
+}
+
+.greeting-signature {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-black);
+    opacity: 0.6;
+    display: inline-block;
+    border-bottom: 1px solid var(--color-black);
+    padding-bottom: 4px;
+}
+
+/* ===========================
+   Section Divider
+   =========================== */
+.landing-divider {
+    height: 1px;
+    background: var(--color-black);
+    opacity: 0.15;
+    margin: 0 2.5rem;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+.landing-footer {
+    text-align: center;
+    padding: 4rem 2rem;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-black);
+    opacity: 0.5;
+    border-top: 1px solid rgba(53, 57, 103, 0.15);
+}
+
+/* ===========================
+   Mobile
+   =========================== */
+@media (max-width: 768px) {
+    .landing-nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+    }
+
+    .nav-links a {
+        letter-spacing: 2px;
+        font-size: 0.7rem;
+    }
+
+    .landing-cover {
+        padding: 7rem 1.5rem 3rem;
+    }
+
+    .cover-ganeshji {
+        width: 65px;
+    }
+
+    .cover-logo {
+        max-width: 320px;
+        width: 90%;
+    }
+
+    .cover-meta-primary {
+        letter-spacing: 2px;
+        font-size: 0.72rem;
+    }
+
+    .landing-hero {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 3rem 1.5rem;
+    }
+
+    .hero-title-line {
+        font-size: 11vw;
+    }
+
+    .hero-title-line.indent {
+        margin-left: 0;
+    }
+
+    .hero-image-frame {
+        height: 380px;
+    }
+
+    .landing-countdown {
+        padding: 2.5rem 1rem;
+    }
+
+    .countdown-timer {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .countdown-value {
+        font-size: 3rem;
+    }
+
+    .countdown-label {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+    }
+
+    .countdown-separator {
+        display: none;
+    }
+
+    .landing-greeting {
+        padding: 4rem 1.5rem;
+    }
+
+    .greeting-text {
+        font-size: 1.6rem;
+    }
+}
