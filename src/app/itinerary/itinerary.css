@@ -110,6 +110,39 @@
 }
 
 /* ===========================
+   Info Bar (Check-in/out)
+   =========================== */
+.itinerary-info-bar {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(53, 57, 103, 0.1);
+}
+
+.itinerary-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-label {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.45;
+}
+
+.info-value {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--color-black);
+}
+
+/* ===========================
    Content Area
    =========================== */
 .itinerary-content {
@@ -233,6 +266,22 @@
 .itinerary-item.type-event .itinerary-item-title {
     font-style: italic;
     font-size: 1.9rem;
+}
+
+.itinerary-item-location {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-black);
+    opacity: 0.6;
+    margin-top: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.location-icon {
+    font-size: 0.9rem;
 }
 
 .itinerary-item-description {

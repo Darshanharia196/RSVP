@@ -48,6 +48,23 @@ export default async function ItineraryPage() {
                 <h1 className="itinerary-header-title">
                     Full <em>Itinerary</em>
                 </h1>
+
+                {(config?.check_in_info || config?.check_out_info) && (
+                    <div className="itinerary-info-bar">
+                        {config.check_in_info && (
+                            <div className="itinerary-info-item">
+                                <span className="info-label">Check-in</span>
+                                <span className="info-value">{config.check_in_info}</span>
+                            </div>
+                        )}
+                        {config.check_out_info && (
+                            <div className="itinerary-info-item">
+                                <span className="info-label">Check-out</span>
+                                <span className="info-value">{config.check_out_info}</span>
+                            </div>
+                        )}
+                    </div>
+                )}
             </header>
 
             {/* ── Content ── */}
@@ -75,6 +92,13 @@ export default async function ItineraryPage() {
                                         <div className="itinerary-item-time">{item.time}</div>
                                         <div className="itinerary-item-body">
                                             <h3 className="itinerary-item-title">{item.title}</h3>
+
+                                            {item.location && (
+                                                <div className="itinerary-item-location">
+                                                    <span className="location-icon">📍</span> {item.location}
+                                                </div>
+                                            )}
+
                                             {item.description && (
                                                 <p className="itinerary-item-description">
                                                     {item.description}

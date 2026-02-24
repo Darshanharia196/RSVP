@@ -18,7 +18,7 @@ export default async function ReachPage() {
     const brideName = config?.bride_name || 'Riddhi';
     const groomName = config?.groom_name || 'Darshan';
 
-    const mapLink = "https://www.google.com/maps/dir/Mumbai,+Maharashtra/The+Grand+Resort+%7C+Luxury+Resort+in+Igatpuri,+Gate+no.+3,+The+Grand+Resort,+Bahuli+Dam+Road,+Vanketesh+Nagar,+Pimpri,+Igatpuri,+Nandgaonsado,+Maharashtra+422402/@19.3301696,72.8779858,10z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x3be7c6306644edc1:0x5da4ed8f8d648c69!2m2!1d72.8320729!2d18.9581934!1m5!1m1!1s0x3bdd8474a886553d:0xa723cf75484f4637!2m2!1d73.5836571!2d19.6645521?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D";
+    const mapLink = "https://www.google.com/maps/dir//The+Grand+Resort+%7C+Luxury+Resort+in+Igatpuri,+Gate+no.+3,+The+Grand+Resort,+Bahuli+Dam+Road,+Vanketesh+Nagar,+Pimpri,+Igatpuri,+Nandgaonsado,+Maharashtra+422402/@19.0773666,72.9120768,14z/data=!4m8!4m7!1m0!1m5!1m1!1s0x3bdd8474a886553d:0xa723cf75484f4637!2m2!1d73.5836571!2d19.6645521?entry=ttu&g_ep=EgoyMDI2MDIxOC4wIKXMDSoASAFQAw%3D%3D";
     const resortLink = "https://ggresort.com/";
 
     return (
