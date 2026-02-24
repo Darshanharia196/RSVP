@@ -33,7 +33,7 @@ async function testConnection() {
         console.log(`📊 Sheet ID: ${spreadsheetId}\n`);
 
         // Test reading from each sheet
-        const sheetNames = ['Families', 'Events', 'Responses', 'Config'];
+        const sheetNames = ['Families', 'Events', 'Responses', 'Config', 'Itinerary', 'Wardrobe'];
 
         for (const sheetName of sheetNames) {
             console.log(`📋 Reading ${sheetName} sheet...`);

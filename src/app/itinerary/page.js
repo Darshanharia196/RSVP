@@ -7,6 +7,8 @@ export const metadata = {
     description: 'Full schedule of events for the wedding celebrations.',
 };
 
+export const revalidate = 0;
+
 // Day labels to dates mapping — update as needed
 const DAY_DATES = {
     'Day 1': 'March 4, 2026',
@@ -38,7 +40,7 @@ export default async function ItineraryPage() {
                 <ul className="nav-links">
                     <li><Link href="/itinerary" className="active">Itinerary</Link></li>
                     <li><Link href="/wardrobe">Wardrobe</Link></li>
-                    <li><Link href="/how-to-reach">Reach</Link></li>
+                    <li><Link href="/how-to-reach">Location</Link></li>
                 </ul>
             </nav>
 

@@ -7,6 +7,8 @@ export const metadata = {
     description: 'Travel guide and directions to the wedding venue.',
 };
 
+export const revalidate = 0;
+
 export default async function ReachPage() {
     let config = {};
     try {
@@ -32,7 +34,7 @@ export default async function ReachPage() {
                 <ul className="nav-links">
                     <li><Link href="/itinerary">Itinerary</Link></li>
                     <li><Link href="/wardrobe">Wardrobe</Link></li>
-                    <li><Link href="/how-to-reach" className="active">Reach</Link></li>
+                    <li><Link href="/how-to-reach" className="active">Location</Link></li>
                 </ul>
             </nav>
 

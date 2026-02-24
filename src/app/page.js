@@ -18,6 +18,8 @@ export async function generateMetadata() {
   }
 }
 
+export const revalidate = 0;
+
 export default async function LandingPage() {
   let config = {};
   try {
@@ -44,7 +46,7 @@ export default async function LandingPage() {
         <ul className="nav-links">
           <li><Link href="/itinerary">Itinerary</Link></li>
           <li><Link href="/wardrobe">Wardrobe</Link></li>
-          <li><Link href="/how-to-reach">Reach</Link></li>
+          <li><Link href="/how-to-reach">Location</Link></li>
         </ul>
       </nav>
 
