@@ -64,26 +64,35 @@ export default async function WardrobePage() {
                                 )}
                             </div>
 
-                            {/* Cards Grid */}
-                            <div className="wardrobe-cards">
+                            {/* Events List */}
+                            <div className="wardrobe-list">
                                 {wardrobe[day].map((item, index) => (
-                                    <div key={index} className="wardrobe-card">
-                                        <div className="wardrobe-card-event">{item.event_name}</div>
-                                        <div className="wardrobe-card-dresscode">{item.dress_code}</div>
+                                    <div key={index} className="wardrobe-item">
+                                        <div className="wardrobe-item-main">
+                                            <h3 className="wardrobe-item-name">{item.event_name}</h3>
+                                            <p className="wardrobe-item-date">{DAY_DATES[day]}</p>
+                                        </div>
 
-                                        {item.colors && (
-                                            <div className="wardrobe-card-colors">
-                                                <span className="wardrobe-colors-label">Colour Palette</span>
-                                                <span className="wardrobe-colors-text">{item.colors}</span>
+                                        <div className="wardrobe-item-meta">
+                                            <div className="wardrobe-meta-block">
+                                                <span className="wardrobe-meta-label">Dress Code</span>
+                                                <span className="wardrobe-meta-value">{item.dress_code}</span>
                                             </div>
-                                        )}
 
-                                        {item.notes && (
-                                            <>
-                                                <div className="wardrobe-card-divider" />
-                                                <p className="wardrobe-card-notes">{item.notes}</p>
-                                            </>
-                                        )}
+                                            {item.colors && (
+                                                <div className="wardrobe-meta-block">
+                                                    <span className="wardrobe-meta-label">Colour Palette</span>
+                                                    <span className="wardrobe-meta-value">{item.colors}</span>
+                                                </div>
+                                            )}
+
+                                            {item.notes && (
+                                                <div className="wardrobe-meta-block">
+                                                    <span className="wardrobe-meta-label">Guide</span>
+                                                    <span className="wardrobe-meta-value">{item.notes}</span>
+                                                </div>
+                                            )}
+                                        </div>
                                     </div>
                                 ))}
                             </div>

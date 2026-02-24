@@ -82,7 +82,7 @@
     padding: 10rem 2.5rem 4rem;
     max-width: 1300px;
     margin: 0 auto;
-    border-bottom: 1px solid var(--color-black);
+    border-bottom: 2px solid var(--color-black);
 }
 
 .wardrobe-header-label {
@@ -121,68 +121,103 @@
    Day Section
    =========================== */
 .wardrobe-day {
-    padding: 4rem 0;
-    border-bottom: 1px solid rgba(53, 57, 103, 0.15);
-}
-
-.wardrobe-day:last-child {
-    border-bottom: none;
+    padding: 2rem 0;
 }
 
 .wardrobe-day-header {
     display: flex;
-    align-items: baseline;
-    gap: 2rem;
-    margin-bottom: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 4rem 0 2rem;
+    position: relative;
+}
+
+.wardrobe-day-header::before,
+.wardrobe-day-header::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--color-black);
+    opacity: 0.15;
 }
 
 .wardrobe-day-label {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-size: 1.5rem;
     font-style: italic;
     font-weight: 400;
     color: var(--color-black);
-    white-space: nowrap;
+    opacity: 0.6;
 }
 
 .wardrobe-day-date {
+    display: none;
+    /* Date shown in item now */
+}
+
+/* ===========================
+   Items List
+   =========================== */
+.wardrobe-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.wardrobe-item {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    padding: 4rem 0;
+    border-bottom: 1px solid rgba(53, 57, 103, 0.12);
+    align-items: start;
+}
+
+.wardrobe-item:last-child {
+    border-bottom: none;
+}
+
+.wardrobe-item-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.wardrobe-item-name {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    line-height: 1.1;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--color-black);
+}
+
+.wardrobe-item-date {
     font-family: var(--font-body);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 3px;
     opacity: 0.5;
 }
 
-/* ===========================
-   Event Cards Grid
-   =========================== */
-.wardrobe-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 2px;
-}
-
-/* ===========================
-   Single Event Card
-   =========================== */
-.wardrobe-card {
-    padding: 2.5rem;
-    border: 1px solid rgba(53, 57, 103, 0.12);
+.wardrobe-item-meta {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
-    background: rgba(255, 255, 255, 0.25);
-    transition: background 0.2s ease;
+    gap: 2.5rem;
+    padding-left: 3rem;
+    border-left: 1px solid rgba(53, 57, 103, 0.12);
 }
 
-.wardrobe-card:hover {
-    background: rgba(255, 255, 255, 0.45);
+.wardrobe-meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.wardrobe-card-event {
+.wardrobe-meta-label {
     font-family: var(--font-body);
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -190,54 +225,20 @@
     opacity: 0.45;
 }
 
-.wardrobe-card-dresscode {
+.wardrobe-meta-value {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-black);
+    opacity: 0.85;
+}
+
+/* Guide/Notes specific styling */
+.wardrobe-meta-block:last-child .wardrobe-meta-value {
+    font-style: italic;
     font-family: var(--font-heading);
-    font-size: 1.8rem;
-    font-style: italic;
-    font-weight: 400;
-    color: var(--color-black);
-    line-height: 1.2;
-}
-
-/* Color swatches row */
-.wardrobe-card-colors {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.wardrobe-colors-label {
-    font-family: var(--font-body);
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.4;
-}
-
-.wardrobe-colors-text {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    color: var(--color-black);
-    opacity: 0.75;
-    line-height: 1.5;
-}
-
-/* Divider */
-.wardrobe-card-divider {
-    height: 1px;
-    background: var(--color-black);
-    opacity: 0.1;
-}
-
-/* Notes */
-.wardrobe-card-notes {
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    line-height: 1.7;
-    color: var(--color-black);
-    opacity: 0.6;
-    font-style: italic;
+    font-size: 1.2rem;
+    opacity: 0.7;
 }
 
 /* ===========================
@@ -257,31 +258,34 @@
    =========================== */
 .wardrobe-footer {
     text-align: center;
-    padding: 3rem 2rem;
+    padding: 5rem 2rem;
     font-family: var(--font-body);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 3px;
     color: var(--color-black);
     opacity: 0.4;
-    border-top: 1px solid rgba(53, 57, 103, 0.15);
+    border-top: 2px solid var(--color-black);
 }
 
 /* ===========================
    Mobile
    =========================== */
-@media (max-width: 768px) {
-    .landing-nav {
-        padding: 1rem 1.5rem;
+@media (max-width: 900px) {
+    .wardrobe-item {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 3rem 0;
     }
 
-    .nav-links {
-        gap: 1.5rem;
+    .wardrobe-item-meta {
+        padding-left: 0;
+        border-left: none;
+        gap: 1.8rem;
     }
 
-    .nav-links a {
-        letter-spacing: 2px;
-        font-size: 0.7rem;
+    .wardrobe-item-name {
+        font-size: 2.2rem;
     }
 
     .wardrobe-header {
@@ -290,24 +294,5 @@
 
     .wardrobe-content {
         padding: 0 1.5rem 4rem;
-    }
-
-    .wardrobe-day-header {
-        flex-direction: column;
-        gap: 0.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .wardrobe-cards {
-        grid-template-columns: 1fr;
-        gap: 1px;
-    }
-
-    .wardrobe-card {
-        padding: 2rem 1.5rem;
-    }
-
-    .wardrobe-card-dresscode {
-        font-size: 1.5rem;
     }
 }
