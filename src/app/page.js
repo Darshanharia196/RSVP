@@ -74,7 +74,7 @@ export default async function LandingPage() {
         </div>
         <div className="hero-image-col">
           <div className="hero-image-frame">
-            <img src="/hero.jpg" alt="Couple" className="hero-image" />
+            <img src="/thankyou.jpg" alt="Couple" className="hero-image" />
           </div>
         </div>
       </section>
