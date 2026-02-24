@@ -62,9 +62,6 @@ export default async function ReachPage() {
                         <a href={mapLink} target="_blank" rel="noopener noreferrer" className="btn-primary">
                             Open in Google Maps ↗
                         </a>
-                        <a href={resortLink} target="_blank" rel="noopener noreferrer" className="btn-secondary">
-                            Visit Website ↗
-                        </a>
                     </div>
                 </section>
 
